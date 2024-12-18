@@ -1,30 +1,56 @@
 import pandas as pd
 from main import bonus
 import pytest
+import copy
+
 
 def TestCase1():
-    EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
-    DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
-    ERRCODE, updated_emp = bonus(EMPTAB, DEPTTAB)
+    EMPTAB = []
+    updated_emp = copy.deepcopy(EMPTAB)
+    DEPTTAB = []
+    updated_dpt = copy.deepcopy(DEPTTAB)
 
+    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
+    ERRCODE, a = bonus(updated_emp, updated_dpt)
+    
     assert ERRCODE == 1
+    assert len(EMPTAB) == len(updated_emp)
+    assert len(DEPTTAB) == len(updated_dpt)
+    assert EMPTAB == updated_emp
+    assert DEPTTAB == updated_dpt
 
 
 def TestCase2():
-    EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
-    DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
-    DEPTTAB.loc[len(DEPTTAB)] = ["D33", 55400.01] #DEPTTAB'in boyutunu 1 yapabilmek için.
-    ERRCODE, updated_emp = bonus(EMPTAB, DEPTTAB)  
+    EMPTAB = []
+    updated_emp = copy.deepcopy(EMPTAB)
+    DEPTTAB = [{"DEPT": "D42", "SALES": 10000.00}] #[{"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":21000.00}]
+    updated_dpt = copy.deepcopy(DEPTTAB)
 
-    assert ERRCODE == 1  
-
-def TestCase3():
-    EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
-    DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
-    EMPTAB.loc[len(EMPTAB)] = ["JONES","M", "D42", 210000.00] #EMPTTAB'in boyutunu 1 yapabilmek için.
-    ERRCODE, updated_emp = bonus(EMPTAB, DEPTTAB)
+    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
+    ERRCODE, a = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 1
+    assert len(EMPTAB) == len(updated_emp)
+    assert len(DEPTTAB) == len(updated_dpt)
+    assert EMPTAB == updated_emp
+    assert DEPTTAB == updated_dpt
+
+
+def TestCase3():
+    EMPTAB = [{"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":21000.00}]
+    updated_emp = copy.deepcopy(EMPTAB)
+    DEPTTAB = []
+    updated_dpt = copy.deepcopy(DEPTTAB)
+
+    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
+    ERRCODE, a = bonus(updated_emp, updated_dpt)
+
+    assert ERRCODE == 1
+    assert len(EMPTAB) == len(updated_emp)
+    assert len(DEPTTAB) == len(updated_dpt)
+    assert EMPTAB == updated_emp
+    assert DEPTTAB == updated_dpt
+
 
 def TestCase4():
     EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
