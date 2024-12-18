@@ -100,10 +100,4 @@ def TestCase7():
     assert updated_emp.loc[updated_emp["NAME"] == "DOLE", "SALARY"].values[0] == 102000.00 #10.2K, 102K'ya dönüştürüldü çünkü öylesi doğru
     assert updated_emp.loc[updated_emp["NAME"] == "FORD", "SALARY"].values[0] == 333333.33 #33.333K, 333.333K'ya dönüştürüldü çünkü öylesi doğru
 
-TestCase1()
-TestCase2()
-TestCase3()
-TestCase4()
-TestCase5()
-TestCase6()
-TestCase7()
+
