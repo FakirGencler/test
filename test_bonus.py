@@ -4,7 +4,7 @@ import pytest
 import copy
 
 
-def TestCase1():
+def test_case1():
     EMPTAB = []
     updated_emp = copy.deepcopy(EMPTAB)
     DEPTTAB = []
@@ -20,7 +20,7 @@ def TestCase1():
     assert DEPTTAB == updated_dpt
 
 
-def TestCase2():
+def test_case2():
     EMPTAB = []
     updated_emp = copy.deepcopy(EMPTAB)
     DEPTTAB = [{"DEPT": "D42", "SALES": 10000.00}] #[{"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":21000.00}]
@@ -36,7 +36,7 @@ def TestCase2():
     assert DEPTTAB == updated_dpt
 
 
-def TestCase3():
+def test_case3():
     EMPTAB = [{"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":21000.00}]
     updated_emp = copy.deepcopy(EMPTAB)
     DEPTTAB = []
@@ -52,7 +52,7 @@ def TestCase3():
     assert DEPTTAB == updated_dpt
 
 
-def TestCase4():
+def test_case4():
     EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
     DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
 
@@ -78,7 +78,7 @@ def TestCase4():
     
 
 
-def TestCase5():
+def test_case5():
     EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
     DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
 
@@ -96,7 +96,7 @@ def TestCase5():
     assert updated_emp.loc[updated_emp["NAME"] == "BEST", "SALARY"].values[0] == 151000.00 #15.1K, 151K'ya dönüştürüldü çünkü öylesi doğru
     assert updated_emp.loc[updated_emp["NAME"] == "CELTO", "SALARY"].values[0] == 151000.01 #15.10001K, 151.001K'ya dönüştürüldü çünkü öylesi doğru
 
-def TestCase6():
+def test_case6():
     EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
     DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
 
@@ -110,7 +110,7 @@ def TestCase6():
     assert updated_emp.loc[updated_emp["NAME"] == "CHIEF", "SALARY"].values[0] == 999999.99 #99.999K, 999.999K'ya dönüştürüldü çünkü öylesi doğru
 
 
-def TestCase7():
+def test_case7():
     EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
     DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
 
