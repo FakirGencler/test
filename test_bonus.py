@@ -23,7 +23,7 @@ def test_case1():
 def test_case2():
     EMPTAB = []
     updated_emp = copy.deepcopy(EMPTAB)
-    DEPTTAB = [{"DEPT": "D42", "SALES": 10000.00}] #[{"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":21000.00}]
+    DEPTTAB = [{"DEPT": "D42", "SALES": 10000.00}]
     updated_dpt = copy.deepcopy(DEPTTAB)
 
     # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
@@ -53,29 +53,39 @@ def test_case3():
 
 
 def test_case4():
-    EMPTAB = pd.DataFrame(columns=["NAME", "CODE", "DEPT", "SALARY"])
-    DEPTTAB = pd.DataFrame(columns=["DEPT", "SALES"])
+    EMPTAB = [
+        {"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":210000.00},
+        {"NAME": "WARNS", "CODE":"M", "DEPT":"D95", "SALARY":120000.00},
+        {"NAME": "LORIN", "CODE":"E", "DEPT":"D42", "SALARY":100000.00},
+        {"NAME": "TOY", "CODE":"E", "DEPT":"D95", "SALARY":160000.00},
+        {"NAME": "SMITH", "CODE":"E", "DEPT":"D32", "SALARY":140000.00}
+    ]
+    expected_emp = [
+        {"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":211000.00},
+        {"NAME": "WARNS", "CODE":"M", "DEPT":"D95", "SALARY":121000.00},
+        {"NAME": "LORIN", "CODE":"E", "DEPT":"D42", "SALARY":102000.00},
+        {"NAME": "TOY", "CODE":"E", "DEPT":"D95", "SALARY":161000.00},
+        {"NAME": "SMITH", "CODE":"E", "DEPT":"D32", "SALARY":140000.00}
+    ]
 
-    EMPTAB.loc[len(EMPTAB)] = ["JONES","M", "D42", 210000.00] #21K, 210K'ya dönüştürüldü çünkü öylesi doğru
-    EMPTAB.loc[len(EMPTAB)] = ["WARNS", "M", "D95", 120000.00] #12K, 120K'ya dönüştürüldü çünkü öylesi doğru
-    EMPTAB.loc[len(EMPTAB)] = ["LORIN","E", "D42", 100000.00] #10K, 100K'ya dönüştürüldü çünkü öylesi doğru
-    EMPTAB.loc[len(EMPTAB)] = ["TOY", "E", "D95", 160000.00] #16K, 160K'ya dönüştürüldü çünkü öylesi doğru
-    EMPTAB.loc[len(EMPTAB)] = ["SMITH","E", "D32", 140000.00] #14K, 140K'ya dönüştürüldü çünkü öylesi doğru
+    DEPTTAB = [
+        {"DEPT": "D42", "SALES": 100000.00},
+        {"DEPT": "D32", "SALES": 80000.00},
+        {"DEPT": "D95", "SALES": 100000.00},
+        {"DEPT": "D44", "SALES": 100000.00}
+    ]
+    
+    updated_emp = copy.deepcopy(EMPTAB)
+    updated_dpt = copy.deepcopy(DEPTTAB)
 
-    DEPTTAB.loc[len(DEPTTAB)] = ["D42", 100000.00]
-    DEPTTAB.loc[len(DEPTTAB)] = ["D32", 80000.00]
-    DEPTTAB.loc[len(DEPTTAB)] = ["D95", 100000.00]
-    DEPTTAB.loc[len(DEPTTAB)] = ["D44", 100000.00]
-
-    ERRCODE, updated_emp = bonus(EMPTAB, DEPTTAB)
+    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
+    ERRCODE, a = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 2
-    assert updated_emp.loc[updated_emp["NAME"] == "JONES", "SALARY"].values[0] == 211000.00 #21.1K, 211K'ya dönüştürüldü çünkü öylesi doğru
-    assert updated_emp.loc[updated_emp["NAME"] == "WARNS", "SALARY"].values[0] == 121000.00 #12.1K, 121K'ya dönüştürüldü çünkü öylesi doğru
-    assert updated_emp.loc[updated_emp["NAME"] == "LORIN", "SALARY"].values[0] == 102000.00 #10.2K, 102K'ya dönüştürüldü çünkü öylesi doğru
-    assert updated_emp.loc[updated_emp["NAME"] == "TOY", "SALARY"].values[0] == 161000.00 #16.1K, 161K'ya dönüştürüldü çünkü öylesi doğru
-    assert updated_emp.loc[updated_emp["NAME"] == "SMITH", "SALARY"].values[0] == 140000.00 #14K, 140K'ya dönüştürüldü çünkü öylesi doğru
-    
+    assert len(EMPTAB) == len(updated_emp)
+    assert len(DEPTTAB) == len(updated_dpt)
+    assert DEPTTAB == updated_dpt
+    assert expected_emp == updated_emp
 
 
 def test_case5():
