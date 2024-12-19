@@ -53,6 +53,8 @@ def test_case3():
 
 
 def test_case4():
+    # Testlerin anlamlı olabilmesi için sayısal değerler 10 ile çarpıldı.
+
     EMPTAB = [
         {"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":210000.00},
         {"NAME": "WARNS", "CODE":"M", "DEPT":"D95", "SALARY":120000.00},
