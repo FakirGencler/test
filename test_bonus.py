@@ -3,7 +3,6 @@ from main import bonus
 import pytest
 import copy
 
-
 def test_case1():
     EMPTAB = []
     updated_emp = copy.deepcopy(EMPTAB)
@@ -18,7 +17,6 @@ def test_case1():
     assert len(DEPTTAB) == len(updated_dpt)
     assert EMPTAB == updated_emp
     assert DEPTTAB == updated_dpt
-
 
 def test_case2():
     EMPTAB = []
@@ -35,7 +33,6 @@ def test_case2():
     assert EMPTAB == updated_emp
     assert DEPTTAB == updated_dpt
 
-
 def test_case3():
     EMPTAB = [{"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":21000.00}]
     updated_emp = copy.deepcopy(EMPTAB)
@@ -51,7 +48,6 @@ def test_case3():
     assert EMPTAB == updated_emp
     assert DEPTTAB == updated_dpt
 
-
 def test_case4():
     # Testlerin anlamlı olabilmesi için sayısal değerler 10 ile çarpıldı.
 
@@ -62,6 +58,7 @@ def test_case4():
         {"NAME": "TOY", "CODE":"E", "DEPT":"D95", "SALARY":160000.00},
         {"NAME": "SMITH", "CODE":"E", "DEPT":"D32", "SALARY":140000.00}
     ]
+
     expected_emp = [
         {"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":211000.00},
         {"NAME": "WARNS", "CODE":"M", "DEPT":"D95", "SALARY":121000.00},
@@ -84,17 +81,20 @@ def test_case4():
     ERRCODE= bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 2
-    assert len(EMPTAB) == len(updated_emp)
-    assert len(DEPTTAB) == len(updated_dpt)
     assert DEPTTAB == updated_dpt
     assert expected_emp == updated_emp
-
 
 def test_case5():
     EMPTAB = [
         {"NAME": "ALLY", "CODE": "E", "DEPT": "D36", "SALARY": 149999.99},
         {"NAME": "BEST", "CODE": "E", "DEPT": "D33", "SALARY": 150000.00},
         {"NAME": "CELTO", "CODE": "E", "DEPT": "D33", "SALARY": 150000.01}
+    ]
+
+    expected_emp = [
+        {"NAME": "ALLY", "CODE": "E", "DEPT": "D36", "SALARY": 151999.99},
+        {"NAME": "BEST", "CODE": "E", "DEPT": "D33", "SALARY": 151000.00},
+        {"NAME": "CELTO", "CODE": "E", "DEPT": "D33", "SALARY": 151000.01}
     ]
 
     DEPTTAB = [
@@ -108,13 +108,16 @@ def test_case5():
     ERRCODE = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 0
-    assert updated_emp[0]["SALARY"] == 151999.99
-    assert updated_emp[1]["SALARY"] == 151000.00
-    assert updated_emp[2]["SALARY"] == 151000.01
+    assert updated_emp == expected_emp
+    assert DEPTTAB == updated_dpt
 
 def test_case6():
     EMPTAB = [
         {"NAME": "CHIEF", "CODE": "M", "DEPT": "D99", "SALARY": 998999.99}
+    ]
+
+    expected_emp = [
+        {"NAME": "CHIEF", "CODE": "M", "DEPT": "D99", "SALARY": 999999.99}
     ]
 
     DEPTTAB = [
@@ -127,11 +130,17 @@ def test_case6():
     ERRCODE = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 0
-    assert updated_emp[0]["SALARY"] == 999999.99
+    assert updated_emp == expected_emp
+    assert DEPTTAB == updated_dpt
 
 def test_case7():
     EMPTAB = [
         {"NAME": "DOLE", "CODE": "E", "DEPT": "D67", "SALARY": 100000.00},
+        {"NAME": "FORD", "CODE": "E", "DEPT": "D22", "SALARY": 333333.33}
+    ]
+
+    expected_emp = [
+        {"NAME": "DOLE", "CODE": "E", "DEPT": "D67", "SALARY": 102000.00},
         {"NAME": "FORD", "CODE": "E", "DEPT": "D22", "SALARY": 333333.33}
     ]
 
@@ -146,7 +155,5 @@ def test_case7():
     ERRCODE = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 2
-    assert updated_emp[0]["SALARY"] == 102000.00
-    assert updated_emp[1]["SALARY"] == 333333.33
-
-
+    assert updated_emp == expected_emp
+    assert DEPTTAB == updated_dpt
