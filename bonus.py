@@ -1,3 +1,5 @@
+import copy
+
 def bonus(EMP_LIST, DEPT_LIST):
     ESIZE = len(EMP_LIST)  # Çalışanlar listesindeki eleman sayısı
     DSIZE = len(DEPT_LIST)  # Departmanlar listesindeki eleman sayısı
@@ -38,3 +40,27 @@ def bonus(EMP_LIST, DEPT_LIST):
                     ERRCODE = 2  # Hata kodu 2 atanır
 
     return ERRCODE
+
+def main():
+    EMPTAB = [
+        {"NAME": "JONES", "CODE":"M", "DEPT":"D42", "SALARY":210000.00},
+        {"NAME": "WARNS", "CODE":"M", "DEPT":"D95", "SALARY":120000.00},
+        {"NAME": "LORIN", "CODE":"E", "DEPT":"D42", "SALARY":100000.00},
+        {"NAME": "TOY", "CODE":"E", "DEPT":"D95", "SALARY":160000.00},
+        {"NAME": "SMITH", "CODE":"E", "DEPT":"D32", "SALARY":140000.00}
+    ]
+
+    DEPTTAB = [
+        {"DEPT": "D42", "SALES": 100000.00},
+        {"DEPT": "D32", "SALES": 80000.00},
+        {"DEPT": "D95", "SALES": 100000.00},
+        {"DEPT": "D44", "SALES": 100000.00}
+    ]
+    
+    updated_emp = copy.deepcopy(EMPTAB)
+    updated_dpt = copy.deepcopy(DEPTTAB)
+
+    ERRCODE = bonus(updated_emp, updated_dpt)
+
+    print("Updated Employees: ", updated_emp)
+    print("Error Code: ", ERRCODE)
