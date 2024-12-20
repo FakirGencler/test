@@ -1,5 +1,4 @@
-import pandas as pd
-from main import bonus
+from bonus import bonus
 import pytest
 import copy
 
@@ -9,8 +8,7 @@ def test_case1():
     DEPTTAB = []
     updated_dpt = copy.deepcopy(DEPTTAB)
 
-    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
-    ERRCODE= bonus(updated_emp, updated_dpt)
+    ERRCODE = bonus(updated_emp, updated_dpt)
     
     assert ERRCODE == 1
     assert len(EMPTAB) == len(updated_emp)
@@ -24,8 +22,7 @@ def test_case2():
     DEPTTAB = [{"DEPT": "D42", "SALES": 10000.00}]
     updated_dpt = copy.deepcopy(DEPTTAB)
 
-    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
-    ERRCODE= bonus(updated_emp, updated_dpt)
+    ERRCODE = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 1
     assert len(EMPTAB) == len(updated_emp)
@@ -39,8 +36,7 @@ def test_case3():
     DEPTTAB = []
     updated_dpt = copy.deepcopy(DEPTTAB)
 
-    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
-    ERRCODE= bonus(updated_emp, updated_dpt)
+    ERRCODE = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 1
     assert len(EMPTAB) == len(updated_emp)
@@ -77,8 +73,7 @@ def test_case4():
     updated_emp = copy.deepcopy(EMPTAB)
     updated_dpt = copy.deepcopy(DEPTTAB)
 
-    # İkinci değişken önemsiz, bonus fonksiyonunun mevcut hâline uyumluluk için
-    ERRCODE= bonus(updated_emp, updated_dpt)
+    ERRCODE = bonus(updated_emp, updated_dpt)
 
     assert ERRCODE == 2
     assert DEPTTAB == updated_dpt
